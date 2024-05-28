@@ -8,16 +8,33 @@ function getProducts() {
 }
 
 function saveProducts(productDetail) {
-    let previousProducts = getProducts()  //vai na local e ve o que tá rolando
-    if (previousProducts == null) { //verifica se está vazio
-        const products = [productDetail] // se estiver vazio ele cria o array para salvar produtos futuros
-        localStorage.setItem(MY_CART_PRODUCTS_KEY_ONE, JSON.stringify(products)) // adiciona no array e converte
+    let previousProducts = getProducts(); // Vai na local e ve o que tá rolando
+    if (previousProducts == null) { // Verifica se está vazio
+        productDetail.quantity = 1; // Inicializa a quantidade como 1
+        const products = [productDetail]; // Se estiver vazio ele cria o array para salvar produtos futuros
+        localStorage.setItem(MY_CART_PRODUCTS_KEY_ONE, JSON.stringify(products)); // Adiciona no array e converte
     } else {
-        previousProducts.push(productDetail) // adiciona um novo 
-        localStorage.setItem(MY_CART_PRODUCTS_KEY_ONE, JSON.stringify(previousProducts)) //converte
-        showSuccessMessage()
+        let productExists = false;
+
+        // Verifica se o produto já está no carrinho
+        previousProducts.forEach((product) => {
+            if (product.id === productDetail.id) {
+                product.quantity += 1; // Incrementa a quantidade
+                productExists = true;
+            }
+        });
+
+        if (!productExists) {
+            productDetail.quantity = 1; // Inicializa a quantidade como 1
+            previousProducts.push(productDetail); // Adiciona um novo produto
+        }
+
+        localStorage.setItem(MY_CART_PRODUCTS_KEY_ONE, JSON.stringify(previousProducts)); // Converte
     }
+    showSuccessMessage();
 }
+
+
 
 function removeProduct(index) {
     let products = getProducts() //vai dar uma olhadinha

@@ -51,12 +51,6 @@ function showProductDetail(productDetail) {
         carouselInner.append(carouselItem)
     })
 
-    //  const myModalCart = document.getElementById('modalCart')
-
-    // myModalCart.addEventListener('hidden.bs.modal', event => {
-    //      document.querySelector('.cart-row').innerHTML = ''
-
-    //   })
 
 }
 
