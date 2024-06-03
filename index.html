@@ -20,7 +20,7 @@
         crossorigin="anonymous"></script>
     <script defer src="local-storage-helper.js"></script>
     <script defer src="index.js"></script>
-    <script defer src="load-products.js"></script>
+    <script defer src="load-api-products.js"></script>
     <script defer src="load-product-details.js"></script>
     <script defer src="load-cart.js"></script>
 
@@ -38,13 +38,18 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Produtos</a>
+                        <a class="nav-link" href="#" onclick="loadProducts()">Página Inicial</a>
+                    </li>
+                    <li class="nav-item">
+                        <select class="form-select" aria-label="Small select example" id="categories-list">
+                            <option selected>Categorias</option>
+                          </select>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Busque seu produto" aria-label="Search">
                     <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
-                </form> 
+                </form>
                 <div>
                     <button type="button" class="btn btn-secondary ms-3" id="open-modal-cart"
                         onclick="onCartBtnClicked()">

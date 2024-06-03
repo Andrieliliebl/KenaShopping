@@ -1,4 +1,3 @@
-
 async function loadProducts() {
     const response = await fetch("https://dummyjson.com/products")
     const productResponse = await response.json()
@@ -8,7 +7,6 @@ async function loadProducts() {
 }
 
 loadProducts()
-
 
 function createElementCard(product) {
 
@@ -53,7 +51,7 @@ function createElementCard(product) {
         myModal.show()
 
         const myModalElement = document.getElementById('myModal')
-        
+
         myModalElement.addEventListener('hidden.bs.modal', event => {
             document.querySelector('.carousel-inner').innerHTML = ''
             document.querySelector('.carousel-indicators').innerHTML = ''
@@ -62,5 +60,40 @@ function createElementCard(product) {
 
         loadProductDetails(product.id)
 
+    })
+}
+
+
+async function loadProductsCategories() {
+    const response = await fetch("https://dummyjson.com/products/categories")
+    let productCategories = await response.json()
+    createCategoryLine(productCategories);
+}
+
+function createCategoryLine(categories) {
+    let categoryListContainer = document.getElementById('categories-list')
+    categories.forEach(category => {
+        let categoryLine = document.createElement('option')
+        categoryListContainer.appendChild(categoryLine)
+        categoryLine.textContent = category.slug
+        categoryLine.value = category.slug
+    });
+
+    categoryListContainer.addEventListener('change', event => {
+        loadProductsByCategory(event.target.value)
+
+    })
+}
+
+loadProductsCategories()
+
+
+async function loadProductsByCategory(category) {
+    const response = await fetch("https://dummyjson.com/products/category/" + category)
+    let productsResponse = await response.json()
+    const appProducts = document.querySelector('#app-products')
+    appProducts.innerHTML = ''
+    productsResponse.products.forEach(product => {
+        createElementCard(product)
     })
 }

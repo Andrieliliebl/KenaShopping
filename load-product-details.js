@@ -57,3 +57,16 @@ function showProductDetail(productDetail) {
 function addToCart() {
     saveProducts(currentProductDetail)
 }
+
+let currentProductCategory = null 
+
+async function loadProductCategory(category) {
+    const response = await fetch("https://dummyjson.com/products/" + category)
+    const productCategory = await response.json()
+    currentProductCategory = productCategory
+    showProductCategory(productCategory)
+}
+
+function showProductsCategory (productCategory) {
+
+}
