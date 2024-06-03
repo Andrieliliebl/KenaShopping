@@ -14,8 +14,8 @@ function createElementCard(product) {
     const cardContainer = document.createElement('div')
     const cardImg = document.createElement('img')
     const cardBody = document.createElement('div')
-    const cardH4 = document.createElement('h4')
-    const cardH5 = document.createElement('h5')
+    const cardH4 = document.createElement('h5')
+    const cardH5 = document.createElement('h6')
     const cardP = document.createElement('p')
 
     const appProducts = document.querySelector('#app-products')
@@ -80,8 +80,11 @@ function createCategoryLine(categories) {
     });
 
     categoryListContainer.addEventListener('change', event => {
-        loadProductsByCategory(event.target.value)
-
+        if (event.target.value == 'categorias') {
+            loadProducts()
+        } else {
+            loadProductsByCategory(event.target.value)
+        }
     })
 }
 
