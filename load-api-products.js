@@ -97,3 +97,22 @@ async function loadProductsByCategory(category) {
         createElementCard(product)
     })
 }
+
+
+
+let searchBtn = document.getElementById('search-btn')
+searchBtn.addEventListener('click', event => {
+    searchProduct()
+})
+
+
+async function searchProduct() {
+    const inputValue = document.getElementById('input-value')
+    const response = await fetch("https://dummyjson.com/products/search?q=" + inputValue.value)
+    let searchResponse = await response.json()
+    const appProducts = document.querySelector('#app-products')
+    appProducts.innerHTML = ''
+    searchResponse.products.forEach(product => {
+        createElementCard(product)
+    })
+}
